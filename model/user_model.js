@@ -6,15 +6,15 @@ const addUser = (body) => {
       body;
     console.log(body);
     pool.query(
-      'INSERT INTO users (first_name,last_name,email,password,city,street,postal_code) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING user_id',
+      'INSERT INTO users (first_name,last_name,email,password,city,street,postal_code) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING id',
       [firstName, lastName, email, password, city, street, postalCode],
       (error, results) => {
         if (error) {
           reject(error);
         }
         if (results) {
-          console.log(`${results.rows[0]['user_id']}`);
-          resolve(`${results.rows[0]['user_id']}`);
+          console.log(`${results.rows[0]['id']}`);
+          resolve(`${results.rows[0]['id']}`);
         }
       }
     );

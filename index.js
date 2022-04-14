@@ -26,9 +26,9 @@ app.use(function (req, res, next) {
   );
   next();
 });
-app.get('/products', (req, res) => {
+app.get('/categories', (req, res) => {
   product_model
-    .getProducts()
+    .getCategories()
     .then((response) => {
       res.status(200).send(response);
     })
@@ -40,6 +40,17 @@ app.get('/products', (req, res) => {
 app.get('/brands', (req, res) => {
   brand_model
     .getBrands()
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send(error);
+    });
+});
+app.get('/products', (req, res) => {
+  product_model
+    .getProducts(req.query.category)
     .then((response) => {
       res.status(200).send(response);
     })
