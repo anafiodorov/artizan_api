@@ -50,7 +50,7 @@ app.get('/brands', (req, res) => {
 });
 app.get('/products', (req, res) => {
   product_model
-    .getProducts(req.query.category)
+    .getProducts(req)
     .then((response) => {
       res.status(200).send(response);
     })
@@ -59,6 +59,7 @@ app.get('/products', (req, res) => {
       res.status(500).send(error);
     });
 });
+
 app.post('/signup', (req, res) => {
   console.log('reqBody' + req);
   user_model

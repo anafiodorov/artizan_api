@@ -30,13 +30,22 @@ const getBrands = () => {
     });
   });
 };
-const getProducts = (category) => {
+
+const getProducts = (req) => {
+  const category = req.query.category;
+  const brand = req.query.brand;
+
   let q = 'select * from product';
   let params = [];
 
-  if (category != undefined && category != null) {
+  console.log(category);
+
+  if (category) {
     q = q + ' where category_id in (select id from category where name = $1)';
     params = [category];
+  } else if (brand) {
+    q = q + ' where brand_id in (select id from brand where alias = $1)';
+    params = [brand];
   }
   return new Promise(function (resolve, reject) {
     pool.query(q, params, (error, results) => {
