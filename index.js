@@ -9,10 +9,6 @@ const bcrypt = require('bcrypt');
 const config = require('./auth.config.js');
 const jwt = require('jsonwebtoken');
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello World!');
-});
-
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
 });
@@ -26,6 +22,10 @@ app.use(function (req, res, next) {
     'Content-Type, Access-Control-Allow-Headers, Authorization'
   );
   next();
+});
+
+app.get('/hello', (req, res) => {
+  res.status(200).send('Hello World!');
 });
 app.get('/categories', (req, res) => {
   product_model
