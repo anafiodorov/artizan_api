@@ -4,6 +4,7 @@ const port = 3001;
 const product_model = require('./model/product_model');
 const brand_model = require('./model/brand_model');
 const user_model = require('./model/user_model');
+const order_model = require('./model/order_model');
 const bcrypt = require('bcrypt');
 const config = require('./auth.config.js');
 const jwt = require('jsonwebtoken');
@@ -59,7 +60,17 @@ app.get('/products', (req, res) => {
       res.status(500).send(error);
     });
 });
-
+app.post('/orders', (req, res) => {
+  console.log('reqBody order' + req);
+  order_model
+    .addOrder(req.body)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
 app.post('/signup', (req, res) => {
   console.log('reqBody' + req);
   user_model
