@@ -9,6 +9,15 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
+pool.on('connect', (client) => {
+  client.query(`SET search_path TO artizan, public`);
+});
+
+pool.on('error', (err) => {
+  console.log(err);
+  return;
+});
+
 module.exports = {
   pool,
 };
