@@ -146,4 +146,4 @@ setInterval(function () {
   console.log('set interval artizan');
   https.get('https://artizan.onrender.com/');
   https.get('https://artizan-api.onrender.com/hello');
-}, 1000 * 60 * 25); // every 25 minutes
+}, 1000 * 60 * 13); // every 25 minutes
