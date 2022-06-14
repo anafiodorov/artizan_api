@@ -34,6 +34,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/hello', (req, res) => {
+  console.log('Hello as called');
   res.status(200).send('Hello World!');
 });
 app.get('/categories', (req, res) => {
