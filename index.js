@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/hello', (req, res) => {
-  console.log('Hello as called');
+  console.log('Hello was called');
   res.status(200).send('Hello World!');
 });
 app.get('/categories', (req, res) => {
@@ -143,6 +143,7 @@ app.post('/login', (req, res) => {
 });
 
 setInterval(function () {
+  console.log('set interval artizan');
   https.get('https://artizan.onrender.com/');
   https.get('https://artizan-api.onrender.com/hello');
 }, 1000 * 60 * 25); // every 25 minutes
