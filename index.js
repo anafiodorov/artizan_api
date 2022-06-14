@@ -8,6 +8,7 @@ const order_model = require('./model/order_model');
 const bcrypt = require('bcrypt');
 const config = require('./auth.config.js');
 const jwt = require('jsonwebtoken');
+var https = require('https');
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
@@ -139,3 +140,8 @@ app.post('/login', (req, res) => {
       res.status(500).send({ message: error.message });
     });
 });
+
+setInterval(function () {
+  https.get('https://artizan.onrender.com/');
+  https.get('https://artizan-api.onrender.com/hello');
+}, 1000 * 60 * 25); // every 25 minutes
