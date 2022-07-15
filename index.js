@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
 const config = require('./auth.config.js');
 const jwt = require('jsonwebtoken');
 var https = require('https');
+var cron = require('node-cron');
 
 app.listen(port, () => {
   console.log(`App running on port ${port}.`);
@@ -142,8 +143,21 @@ app.post('/login', (req, res) => {
     });
 });
 
-setInterval(function () {
-  console.log('set interval artizan');
-  https.get('https://artizan.onrender.com/');
-  https.get('https://artizan-api.onrender.com/hello');
-}, 1000 * 60 * 13); // every 25 minutes
+// setInterval(function () {
+//   console.log('set interval artizan');
+//   https.get('https://artizan.onrender.com/');
+//   https.get('https://artizan-api.onrender.com/hello');
+// }, 1000 * 60 * 13); // every 13 minutes
+
+cron.schedule(
+  '*/13 10-22 * * *',
+  () => {
+    console.log('Running a job at 01:00 at America/Sao_Paulo timezone');
+    https.get('https://artizan.onrender.com/');
+    https.get('https://artizan-api.onrender.com/hello');
+  },
+  {
+    scheduled: true,
+    timezone: 'Europe/Bucharest',
+  }
+);

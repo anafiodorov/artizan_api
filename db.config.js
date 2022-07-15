@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 pool.on('connect', (client) => {
-  client.query(`SET search_path TO artizan, public`);
+  client.query(`SET search_path TO public`);
 });
 
 pool.on('error', (err) => {
