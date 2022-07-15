@@ -152,7 +152,9 @@ app.post('/login', (req, res) => {
 cron.schedule(
   '*/13 10-22 * * *',
   () => {
-    console.log('Running a job at 01:00 at America/Sao_Paulo timezone');
+    console.log(
+      'Running a job every 13 minutes from 10-22 at Romania/Bucharest timezone'
+    );
     https.get('https://artizan.onrender.com/');
     https.get('https://artizan-api.onrender.com/hello');
   },
