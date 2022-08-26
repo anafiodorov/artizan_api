@@ -5,6 +5,7 @@ const product_model = require('./model/product_model');
 const brand_model = require('./model/brand_model');
 const user_model = require('./model/user_model');
 const order_model = require('./model/order_model');
+const size_model = require('./model/size_model');
 const bcrypt = require('bcrypt');
 const config = require('./auth.config.js');
 const jwt = require('jsonwebtoken');
@@ -63,6 +64,17 @@ app.get('/brands', (req, res) => {
 app.get('/products', (req, res) => {
   product_model
     .getProducts(req)
+    .then((response) => {
+      res.status(200).send(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send(error);
+    });
+});
+app.get('/size', (req, res) => {
+  size_model
+    .getSize(req)
     .then((response) => {
       res.status(200).send(response);
     })

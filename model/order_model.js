@@ -26,7 +26,7 @@ const addOrder = (body) => {
           var orderId = parseInt(`${results.rows[0]['order_id']}`);
           console.log('OrderId: ' + `${orderId}`);
           order.forEach((element) => {
-            console.log('elem:' + element);
+            console.log('elem:' + JSON.stringify(element));
             pool.query(
               'INSERT INTO orderitems (order_id,product_id,product_name, price, amount) VALUES ($1, $2, $3, $4, $5) RETURNING orderitems_id',
               [
@@ -45,6 +45,7 @@ const addOrder = (body) => {
                   console.log(
                     'OrderItemId: ' + `${results.rows[0]['orderitems_id']}`
                   );
+                  resolve(results.rows);
                 }
               }
             );
